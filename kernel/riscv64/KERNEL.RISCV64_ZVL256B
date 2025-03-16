@@ -183,6 +183,15 @@ ZHEMV_M_KERNEL =  zhemv_LM_vector.c
 ZHEMV_U_KERNEL =  zhemv_UV_vector.c
 ZHEMV_V_KERNEL =  zhemv_UV_vector.c
 
+CHBMV_L_KERNEL =  zhbmv_vector.c
+CHBMV_M_KERNEL =  zhbmv_vector.c
+CHBMV_U_KERNEL =  zhbmv_vector.c
+CHBMV_V_KERNEL =  zhbmv_vector.c
+ZHBMV_L_KERNEL =  zhbmv_vector.c
+ZHBMV_M_KERNEL =  zhbmv_vector.c
+ZHBMV_U_KERNEL =  zhbmv_vector.c
+ZHBMV_V_KERNEL =  zhbmv_vector.c
+
 LSAME_KERNEL = ../generic/lsame.c
 
 SCABS_KERNEL	= ../generic/cabs.c
