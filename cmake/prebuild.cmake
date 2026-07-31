@@ -1432,6 +1432,24 @@ endif ()
     set(ZGEMM_UNROLL_M 2)
     set(ZGEMM_UNROLL_N 2)
     set(SYMV_P 16)
+  elseif ("${TCORE}" STREQUAL "C920")
+    file(APPEND ${TARGET_CONF_TEMP}
+      "#define L1_DATA_SIZE 32768\n"
+      "#define L1_DATA_LINESIZE 32\n"
+      "#define L2_SIZE 1048576\n"
+      "#define L2_LINESIZE 32 \n"
+      "#define DTB_DEFAULT_ENTRIES 128\n"
+      "#define DTB_SIZE 4096\n"
+      "#define L2_ASSOCIATIVE 4\n")
+    set(SGEMM_UNROLL_M 8)
+    set(SGEMM_UNROLL_N 8)
+    set(DGEMM_UNROLL_M 8)
+    set(DGEMM_UNROLL_N 4)
+    set(CGEMM_UNROLL_M 8)
+    set(CGEMM_UNROLL_N 4)
+    set(ZGEMM_UNROLL_M 4)
+    set(ZGEMM_UNROLL_N 4)
+    set(SYMV_P 16)
   elseif ("${TCORE}" STREQUAL "x280")
     file(APPEND ${TARGET_CONF_TEMP}
       "#define L1_DATA_SIZE 65536\n"

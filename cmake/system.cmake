@@ -392,7 +392,9 @@ if (${TARGET} STREQUAL NEOVERSEV1)
     endif()
   endif()
 
-  if ((${TARGET} STREQUAL RISCV64_ZVL128B) OR (${TARGET} STREQUAL RISCV64_ZVL256B))
+  if ((${TARGET} STREQUAL RISCV64_ZVL128B) OR
+      (${TARGET} STREQUAL RISCV64_ZVL256B) OR
+      (${TARGET} STREQUAL C920))
     set (RISCV64_OPT "rv64imafdcv")
     if (BUILD_BFLOAT16)
       set (RISCV64_OPT "${RISCV64_OPT}_zvfbfwma")
@@ -405,6 +407,11 @@ if (${TARGET} STREQUAL NEOVERSEV1)
     endif()
     if (${TARGET} STREQUAL RISCV64_ZVL128B)
       set (KERNEL_DEFINITIONS "${KERNEL_DEFINITIONS} -march=${RISCV64_OPT}_zvl128b -mabi=lp64d")
+    endif()
+
+    if (${TARGET} STREQUAL C920)
+      set (KERNEL_DEFINITIONS
+           "${KERNEL_DEFINITIONS} -march=rv64imafdcv_zvl128b -mabi=lp64d")
     endif()
   endif()
   if (${TARGET} STREQUAL RISCV64_GENERIC)

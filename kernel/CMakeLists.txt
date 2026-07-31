@@ -36,6 +36,21 @@ function (build_core TARGET_CORE KDIR TSUFFIX KERNEL_DEFINITIONS)
     if (${DYNAMIC_ARCH})
         include("${PROJECT_SOURCE_DIR}/cmake/system.cmake")
     endif ()
+
+    # CMake prebuild values are not reliably visible to all generated
+    # Level-3 copy objects for the standalone C920 target.
+    # Re-assert the C920 RVV 1.0 blocking parameters in this function scope.
+    if (${TARGET_CORE} STREQUAL C920 OR ${CORE} STREQUAL C920)
+        set(SGEMM_UNROLL_M 8)
+        set(SGEMM_UNROLL_N 8)
+        set(DGEMM_UNROLL_M 8)
+        set(DGEMM_UNROLL_N 4)
+        set(CGEMM_UNROLL_M 8)
+        set(CGEMM_UNROLL_N 4)
+        set(ZGEMM_UNROLL_M 4)
+        set(ZGEMM_UNROLL_N 4)
+        set(SYMV_P 16)
+    endif ()
     # getarch may select a fallback core when CPU features are disabled.
     set (KERNEL_CORE "${TARGET_CORE}")
     if (${DYNAMIC_ARCH} AND NOT CMAKE_CROSSCOMPILING)
